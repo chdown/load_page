@@ -1,7 +1,8 @@
 name: load_page
 description: A new Flutter project.
 version: 0.0.1
-homepage:
+homepage: https://github.com/chdown/load_page
+publish_to: 'https://pub.dev'
 
 environment:
   sdk: '>=2.19.6 <3.0.0'

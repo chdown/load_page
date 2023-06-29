@@ -2,19 +2,19 @@
 
 ------
 
-English | [中文](./README_CN.md)
+[English](./README.md) | 中文
 
 ------
 
 ## Features
 
-* Implement app default page
-* Supports global configuration
-* Support personalized configuration and parameter transfer
+* 实现app缺省页
+* 支持全局配置
+* 支持个性化配置和参数传递
 
 ## Usage
 
-### Default Page Definition
+### 缺省页定义
 
 ```dart
 class xxxWidget extends LoadWidget {
@@ -33,10 +33,10 @@ class _xxxWidgetState extends State<xxxWidget> {
 }
 ```
 
-* Call the 'onTap' method of 'LoadWidget' to achieve unified refresh requests
-* Call 'params' to obtain custom parameters
+* 调用`LoadWidget`的`onTap`方法，实现统一的刷新请求
+* 调用`params`获取自定义参数
 
-### Global Configuration Default Page
+### 全局配置缺省页
 
 ```dart
 LoadPage.defaultPages = () {
@@ -48,7 +48,7 @@ LoadPage.defaultPages = () {
 };
 ```
 
-### Page Usage
+### 页面使用
 
 ```dart
 LoadPage(
