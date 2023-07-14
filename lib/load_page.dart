@@ -1,16 +1,15 @@
 library load_page;
 
 import 'package:flutter/material.dart';
-
 import 'load_status.dart';
 import 'load_widget.dart';
 
+part 'load_controller.dart';
+
 /// 缺省页
 class LoadPage extends StatefulWidget {
-  static const String _loadStatusContent = "content";
-
-  /// 当前展示的页面,默认为content
-  final String? tag;
+  /// 控制器
+  final LoadController loadController;
 
   /// 点击事件
   final void Function()? onTap;
@@ -29,9 +28,9 @@ class LoadPage extends StatefulWidget {
 
   static Map<String, LoadWidget>? get _defaultPages => defaultPages.call();
 
-  const LoadPage({
+  const LoadPage(
+    this.loadController, {
     super.key,
-    this.tag = _loadStatusContent,
     this.onTap,
     this.params,
     required this.content,
@@ -43,13 +42,22 @@ class LoadPage extends StatefulWidget {
 }
 
 class _LoadPageState extends State<LoadPage> {
+  /// 当前展示的页面,默认为content
+  String pageTag = LoadStatus.content.name;
+
+  @override
+  void initState() {
+    super.initState();
+    widget.loadController._bind(this);
+  }
+
   @override
   Widget build(BuildContext context) {
     var pages = parsePages();
     return Stack(
       children: [
         Offstage(
-          offstage: widget.tag != LoadStatus.content.name,
+          offstage: pageTag != LoadStatus.content.name,
           child: widget.content,
         ),
         for (var page in pages) page,
@@ -69,11 +77,18 @@ class _LoadPageState extends State<LoadPage> {
       loadWidget.params = widget.params;
       pages.add(
         Offstage(
-          offstage: tag != widget.tag,
+          offstage: tag != tag,
           child: loadWidget,
         ),
       );
     });
     return pages;
+  }
+
+  /// 切换页面的方法
+  void showPage(String tag) {
+    setState(() {
+      tag = tag;
+    });
   }
 }
