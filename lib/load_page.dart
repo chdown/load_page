@@ -88,7 +88,7 @@ class _LoadPageState extends State<LoadPage> {
   /// 切换页面的方法
   void showPage(String tag) {
     setState(() {
-      tag = tag;
+      pageTag = tag;
     });
   }
 }
