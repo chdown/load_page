@@ -54,10 +54,13 @@ LoadPage.defaultPages = () {
 LoadPage(
   onTap: () {
   },
+  controler: controler.loadPageController,
   content: widget,
-  tag: controller.tag.value,
   params : 
   otherPages :
 )
+
+// update
+loadPageController.showXXX();
 ```
 
