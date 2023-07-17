@@ -1,6 +1,6 @@
 part of load_page;
 
-class LoadController {
+class LoadPageController {
   /// [LoadPage] sate.
   _LoadPageState? _state;
 

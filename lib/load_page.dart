@@ -1,6 +1,7 @@
 library load_page;
 
 import 'package:flutter/material.dart';
+
 import 'load_status.dart';
 import 'load_widget.dart';
 
@@ -9,16 +10,16 @@ part 'load_controller.dart';
 /// 缺省页
 class LoadPage extends StatefulWidget {
   /// 控制器
-  final LoadController loadController;
+  final LoadPageController controller;
 
   /// 点击事件
   final void Function()? onTap;
 
-  /// 自定义参数
-  final Map<String, String>? params;
-
-  /// content页面
+  /// content页面，用于展示给客户
   final Widget content;
+
+  /// 自定义参数，会传递到 [LoadWidget] 中
+  final Map<String, String>? params;
 
   /// 自定义页面。自定义页面中的key会覆盖全局配置的key
   final Map<String, LoadWidget>? otherPages;
@@ -28,12 +29,12 @@ class LoadPage extends StatefulWidget {
 
   static Map<String, LoadWidget>? get _defaultPages => defaultPages.call();
 
-  const LoadPage(
-    this.loadController, {
+  const LoadPage({
     super.key,
+    required this.controller,
     this.onTap,
-    this.params,
     required this.content,
+    this.params,
     this.otherPages,
   });
 
@@ -43,12 +44,12 @@ class LoadPage extends StatefulWidget {
 
 class _LoadPageState extends State<LoadPage> {
   /// 当前展示的页面,默认为content
-  String pageTag = LoadStatus.content.name;
+  String _pageTag = LoadStatus.content.name;
 
   @override
   void initState() {
     super.initState();
-    widget.loadController._bind(this);
+    widget.controller._bind(this);
   }
 
   @override
@@ -57,7 +58,7 @@ class _LoadPageState extends State<LoadPage> {
     return Stack(
       children: [
         Offstage(
-          offstage: pageTag != LoadStatus.content.name,
+          offstage: _pageTag != LoadStatus.content.name,
           child: widget.content,
         ),
         for (var page in pages) page,
@@ -77,7 +78,7 @@ class _LoadPageState extends State<LoadPage> {
       loadWidget.params = widget.params;
       pages.add(
         Offstage(
-          offstage: tag != tag,
+          offstage: _pageTag != tag,
           child: loadWidget,
         ),
       );
@@ -88,7 +89,7 @@ class _LoadPageState extends State<LoadPage> {
   /// 切换页面的方法
   void showPage(String tag) {
     setState(() {
-      pageTag = tag;
+      _pageTag = tag;
     });
   }
 }
