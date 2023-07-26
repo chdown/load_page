@@ -1,5 +1,7 @@
 library load_page;
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import 'load_status.dart';
@@ -13,7 +15,7 @@ class LoadPage extends StatefulWidget {
   final LoadPageController controller;
 
   /// 点击事件
-  final void Function()? onTap;
+  final FutureOr Function(Map<String, String>? params)? onTap;
 
   /// content页面，用于展示给客户
   final Widget content;
