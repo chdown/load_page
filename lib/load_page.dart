@@ -29,7 +29,11 @@ class LoadPage extends StatefulWidget {
   /// 全局配置的默认页面
   static Map<String, LoadWidget>? Function() defaultPages = () => null;
 
+  /// 获取默认的公共页面
   static Map<String, LoadWidget>? get _defaultPages => defaultPages.call();
+
+  /// 全局默认状态
+  static LoadStatus defaultLoadStatus = LoadStatus.content;
 
   const LoadPage({
     super.key,
@@ -46,7 +50,7 @@ class LoadPage extends StatefulWidget {
 
 class _LoadPageState extends State<LoadPage> {
   /// 当前展示的页面,默认为content
-  String _pageTag = LoadStatus.content.name;
+  String _pageTag = LoadPage.defaultLoadStatus.name;
 
   @override
   void initState() {

@@ -3,6 +3,9 @@ enum LoadStatus {
   /// 空页面
   empty,
 
+  /// 网络错误页
+  netError,
+
   /// 错误页
   error,
 

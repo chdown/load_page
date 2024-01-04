@@ -32,4 +32,8 @@ class LoadPageController {
   void showCustom(String customTag) {
     _state?.showPage(customTag);
   }
+
+  void dispose(){
+    _state = null;
+  }
 }
